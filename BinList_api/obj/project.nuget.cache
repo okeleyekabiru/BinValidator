@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "HkrzkZLGuDBbCyMS3alUo6lA7Xc91BKThoCRGmhgU4haOAs9Oub2yArl3+SxxcOglUM+FWlUQzg/hKgYqn6MKw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\toby\\source\\repos\\BinList\\BinList_api\\BinList_api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\toby\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\toby\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.10\\microsoft.netcore.app.host.win-x64.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}
