@@ -1,5 +1,6 @@
 using BinList_api.Models;
 using BinList_api.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +39,10 @@ namespace BinList_api
             services.AddSwaggerGen();
             var googleCred = Configuration.GetValue<GoogleConfig>("Google");
 
-            services.AddAuthentication()
+            services.AddAuthentication(opt => {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = "UnAuthorized";
+            })
          .AddGoogle(options =>
          {
              IConfigurationSection googleAuthNSection =
@@ -46,6 +50,11 @@ namespace BinList_api
 
              options.ClientId = googleAuthNSection["ClientId"];
              options.ClientSecret = googleAuthNSection["ClientSecret"];
+         }).AddFacebook(opt => {
+             IConfigurationSection fbAuthNSection =
+                 Configuration.GetSection("OAuthFacebook");
+             opt.AppId = fbAuthNSection["AppId"];
+             opt.AppSecret = fbAuthNSection["AppSecret"];
          });
         }
 
@@ -61,8 +70,8 @@ namespace BinList_api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-          
 
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

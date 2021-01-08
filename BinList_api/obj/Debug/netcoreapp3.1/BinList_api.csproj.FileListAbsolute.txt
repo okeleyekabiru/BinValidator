@@ -46,3 +46,11 @@ C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Serilog.S
 C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
 C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
 C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\toby\source\repos\BinList\BinList_api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

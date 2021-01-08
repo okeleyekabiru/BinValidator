@@ -24,8 +24,9 @@ namespace BinList_api.Controllers
            _binValidator = binValidator;
             _logger = logger;
         }
+        //[Authorize]
         [HttpPost("bin")]
-        [Authorize]
+        
         public async Task<ActionResult> VerifyCardBin([FromBody]BinRequest request)
         {
             BaseResponse<BinResponse> response = null;
