@@ -1,5 +1,8 @@
 using BinList_api.Models;
 using BinList_api.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,24 +41,39 @@ namespace BinList_api
             });
             services.AddSwaggerGen();
             var googleCred = Configuration.GetValue<GoogleConfig>("Google");
+            IConfigurationSection googleAuthNSection =
+                 Configuration.GetSection("Google");
+            
+            IConfigurationSection fbAuthNSection =
+              Configuration.GetSection("OAuthFacebook");
 
-            services.AddAuthentication(opt => {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = "UnAuthorized";
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+
             })
          .AddGoogle(options =>
          {
-             IConfigurationSection googleAuthNSection =
-                 Configuration.GetSection("Google");
 
              options.ClientId = googleAuthNSection["ClientId"];
              options.ClientSecret = googleAuthNSection["ClientSecret"];
-         }).AddFacebook(opt => {
-             IConfigurationSection fbAuthNSection =
-                 Configuration.GetSection("OAuthFacebook");
+
+
+         }); 
+            services.AddAuthentication(options =>
+         {
+             options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+             options.DefaultChallengeScheme = FacebookDefaults.AuthenticationScheme;
+
+         }).AddFacebook(opt =>
+         {
+             opt.Scope.Add("https://www.facebook.com/dialog/oauth"); 
              opt.AppId = fbAuthNSection["AppId"];
              opt.AppSecret = fbAuthNSection["AppSecret"];
-         });
+
+        });
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,11 +89,13 @@ namespace BinList_api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseAuthentication();
+           
+            
+            
+          
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

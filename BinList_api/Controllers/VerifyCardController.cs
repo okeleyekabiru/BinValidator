@@ -1,5 +1,7 @@
 ﻿using BinList_api.Models;
 using BinList_api.Services;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +26,7 @@ namespace BinList_api.Controllers
            _binValidator = binValidator;
             _logger = logger;
         }
-        //[Authorize]
+        [Authorize]
         [HttpPost("bin")]
         
         public async Task<ActionResult> VerifyCardBin([FromBody]BinRequest request)
