@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,26 @@ namespace BinList_api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+            .Enrich.FromLogContext().WriteTo.File(@$"c:\binvalidator\log_{Guid.NewGuid()}.txt")
+            .CreateLogger();
+
+            try
+            {
+                Log.Information("binvalidator starting......");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "an error occurd while starting binvalidator");
+                return;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
